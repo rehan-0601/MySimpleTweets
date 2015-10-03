@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp">
+
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="Tweet"
+            android:id="@+id/btnTweet"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:foreground="#fffafa"
+            android:background="#0c9ae0"
+            android:textColor="#fffafa"
+            android:onClick="onTweet"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="140"
+            android:id="@+id/tvLength"
+            android:textSize="17dp"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/btnTweet"
+            android:layout_toStartOf="@+id/btnTweet"
+            android:layout_alignBottom="@+id/btnTweet"
+            android:layout_marginRight="7dp"
+            android:textColor="#928d8d" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="X"
+            android:id="@+id/btnCancel"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="#fffafa"
+            android:textColor="#928d8d" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etTweet"
+            android:layout_marginTop="20dp"
+            android:hint="What&apos;s happening?"
+            android:layout_below="@+id/btnCancel"
+            android:layout_alignLeft="@+id/btnCancel"
+            android:layout_alignStart="@+id/btnCancel" />
+
+
+
+
+</RelativeLayout>
