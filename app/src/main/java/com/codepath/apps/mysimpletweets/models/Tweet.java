@@ -18,9 +18,23 @@ public class Tweet implements Serializable {
     private long uid;
     private User user;
     private String createdAt;
+    private String mediaUrl;
+    private int retweetCount;
+    private int favoritesCount;
 
     public String getBody() {
         return body;
+    }
+    public int getRetweetCount(){
+        return retweetCount;
+    }
+
+    public int getFavoritedCount(){
+        return favoritesCount;
+    }
+
+    public String getMediaUrl(){
+        return mediaUrl;
     }
 
     public String getCreatedAt() {
@@ -45,14 +59,27 @@ public class Tweet implements Serializable {
             tweet.uid = jsonObject.getLong("id");
             tweet.createdAt = jsonObject.getString("created_at");
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+            tweet.retweetCount = jsonObject.getInt("retweet_count");
+            tweet.favoritesCount = jsonObject.getInt("favorites_count");
+
+            tweet.mediaUrl = null;
+            if(jsonObject.optJSONObject("entities")!=null){
+                JSONObject entitiesObject = jsonObject.getJSONObject("entities");
+                if(entitiesObject.optJSONArray("media")!=null){
+                    JSONArray mediaArray = entitiesObject.getJSONArray("media");
+                    if(mediaArray.length()>0){
+                        tweet.mediaUrl = mediaArray.getJSONObject(0).getString("media_url");
+                    }
+                }
+
+
+            }
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-
-        //tweet.user  =
 
         return tweet;
     }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:descendantFocusability="blocksDescendants">
 
     <ImageView
         android:layout_width="50dp"
@@ -12,14 +13,28 @@
         android:layout_alignParentStart="true"
         android:layout_marginRight="5dp" />
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="billy"
-        android:id="@+id/tvUserName"
+        android:id="@+id/tvUser"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/ivProfileImage"
-        android:layout_toEndOf="@+id/ivProfileImage" />
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="billy"
+        android:layout_marginTop="3dp"
+        android:id="@+id/tvUserName"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tvUser"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:layout_marginLeft="5dp"
+        android:textSize="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,9 +42,9 @@
         android:text="body"
         android:id="@+id/tvBody"
         android:layout_below="@id/tvUserName"
-        android:layout_alignBottom="@+id/ivProfileImage"
         android:layout_toRightOf="@+id/ivProfileImage"
         android:layout_toEndOf="@+id/ivProfileImage" />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,5 +55,67 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="5dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivMedia"
+        android:layout_below="@+id/tvBody"
+        android:layout_alignLeft="@+id/tvBody"
+        android:layout_alignStart="@+id/tvBody"
+        android:visibility="visible" />
+
+
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:id="@+id/ivReply"
+        android:layout_below="@id/ivMedia"
+        android:src="@drawable/twitter_reply"
+        android:foreground="#b5b0b0"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/ivProfileImage" />
+
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:id="@+id/ivFavorite"
+        android:src="@drawable/twitter_fav_colored"
+        android:layout_below="@+id/ivMedia"
+        android:layout_toRightOf="@+id/ivRetweet"
+        android:layout_toEndOf="@+id/ivRetweet"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp"/>
+
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:id="@+id/ivRetweet"
+        android:layout_below="@id/ivMedia"
+        android:src="@drawable/twitter_retweet"
+        android:layout_toRightOf="@+id/ivReply"
+        android:layout_toEndOf="@+id/ivReply"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="60dp" />
+
+    <TextView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:text="1"
+        android:id="@+id/tvRetweet"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/ivMedia"
+        android:layout_toRightOf="@+id/ivRetweet"
+        android:layout_toEndOf="@+id/ivRetweet" />
+
+    <TextView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:text="1"
+        android:id="@+id/tvFavorite"
+        android:layout_below="@+id/ivMedia"
+        android:layout_alignTop="@+id/tvRetweet"
+        android:layout_toRightOf="@+id/ivFavorite"
+         />
 
 </RelativeLayout>

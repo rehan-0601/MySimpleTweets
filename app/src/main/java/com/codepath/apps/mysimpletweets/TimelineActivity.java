@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class TimelineActivity extends AppCompatActivity {
     private ListView lvTweets;
     private long curr_max_id = 0;
     private SwipeRefreshLayout swipeContainer;
+    private ComposeDialog composeDialog;
 
 
     @Override
@@ -76,8 +79,9 @@ public class TimelineActivity extends AppCompatActivity {
     }
 
     private void setUpListeners(){
-        ComposeDialog composeDialog = new ComposeDialog();
+        composeDialog = ComposeDialog.newInstance("Compose a tweet");
         composeDialog.setComposeDialogListener(new ComposeDialogListener() {
+            //hello
             @Override
             public void onTweetFinish(Tweet postedTweet) {
                 //Need to add new tweet to beginning of adapter. Not sure which api. Using the List to do it.
@@ -87,6 +91,18 @@ public class TimelineActivity extends AppCompatActivity {
 
             }
         });
+
+        lvTweets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Tweet tweet = tweets.get(position);
+                Intent tweetDetailIntent = new Intent(TimelineActivity.this, TweetDetailActivity.class);
+                tweetDetailIntent.putExtra("current_tweet",tweet);
+                startActivity(tweetDetailIntent);
+
+            }
+        });
+
     }
 
     private void addListenerToListView(){
@@ -105,7 +121,7 @@ public class TimelineActivity extends AppCompatActivity {
             //SUCCESS
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
-                Toast.makeText(getApplicationContext(), "Success-getHome", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Success-getHome", Toast.LENGTH_LONG).show();
                 Log.d("DEBUG", json.toString());
                 //JSON HERE
                 //DESERIALIZE JSON
@@ -113,7 +129,7 @@ public class TimelineActivity extends AppCompatActivity {
                 //LOAD MODEL DATA INTO LISTVIEW
                 aTweets.addAll(Tweet.fromJSONArray(json));
                 curr_max_id = aTweets.getItem(aTweets.getCount() - 1).getUid() - 1;
-                Toast.makeText(getApplicationContext(), "MAX_ID is" + curr_max_id, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "MAX_ID is" + curr_max_id, Toast.LENGTH_LONG).show();
 
             }
 
@@ -121,7 +137,7 @@ public class TimelineActivity extends AppCompatActivity {
             //FAILURE
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Toast.makeText(getApplicationContext(), errorResponse.toString(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), errorResponse.toString(), Toast.LENGTH_LONG).show();
                 Log.d("DEBUG", errorResponse.toString());
 
             }
@@ -161,7 +177,8 @@ public class TimelineActivity extends AppCompatActivity {
 
     private void showComposeDialog(){
         FragmentManager fm = getSupportFragmentManager();
-        ComposeDialog composeDialog = ComposeDialog.newInstance("Compose a tweet");
+        //initialising in onCreate. we need the instance earlier to set the listener on it.
+        //composeDialog = ComposeDialog.newInstance("Compose a tweet");
         composeDialog.show(fm, "dialog_compose");
     }
 
@@ -179,4 +196,5 @@ public class TimelineActivity extends AppCompatActivity {
             aTweets.notifyDataSetChanged();
         }
     }
+
 }

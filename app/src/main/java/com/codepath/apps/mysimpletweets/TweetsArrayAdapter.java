@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.codepath.apps.mysimpletweets.helpers.LinkifiedTextView;
 import com.codepath.apps.mysimpletweets.models.Tweet;
 import com.squareup.picasso.Picasso;
 
@@ -47,14 +48,30 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         }
         ImageView ivProfileImage = (ImageView) convertView.findViewById(R.id.ivProfileImage);
         TextView tvUserName = (TextView) convertView.findViewById(R.id.tvUserName);
+        TextView tvUser = (TextView) convertView.findViewById(R.id.tvUser);
         TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
         TextView tvCreatedAt = (TextView) convertView.findViewById(R.id.tvCreatedAt);
+        ImageView ivMedia = (ImageView) convertView.findViewById(R.id.ivMedia);
+        TextView tvRetweet = (TextView) convertView.findViewById(R.id.tvRetweet);
+        TextView tvFavorite =(TextView) convertView.findViewById(R.id.tvFavorite);
 
-        tvUserName.setText(tweet.getUser().getScreenName());
+        tvUser.setText(tweet.getUser().getName());
+        tvUserName.setText("@"+tweet.getUser().getScreenName());
         tvBody.setText(tweet.getBody());
         tvCreatedAt.setText(trimRelativeTimeAgo(getRelativeTimeAgo(tweet.getCreatedAt())));
+
         ivProfileImage.setImageResource(android.R.color.transparent);//clear out old image for recycled view
         Picasso.with(getContext()).load(tweet.getUser().getProfileImageUrl()).into(ivProfileImage);
+        ivMedia.setImageResource(android.R.color.transparent);
+        if(tweet.getMediaUrl()!=null) {
+            //ivMedia.setMaxHeight(175);
+
+            //getting image of size:small, supported by twitter
+            Picasso.with(getContext()).load(tweet.getMediaUrl() + ":small").into(ivMedia);
+        }
+
+        tvRetweet.setText(Integer.toString(tweet.getRetweetCount()));
+        tvFavorite.setText(Integer.toString(tweet.getFavoritedCount()));
 
 
         return convertView;

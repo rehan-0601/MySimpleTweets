@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/ivProfilePic"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User "
+        android:id="@+id/tvUserName"
+        android:layout_alignTop="@+id/ivProfilePic"
+        android:layout_toRightOf="@+id/ivProfilePic"
+        android:layout_toEndOf="@+id/ivProfilePic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="userid"
+        android:id="@+id/tvScreenName"
+        android:layout_below="@+id/tvUserName"
+        android:layout_toRightOf="@+id/ivProfilePic"
+        android:layout_toEndOf="@+id/ivProfilePic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tweet"
+        android:id="@+id/tvTweet"
+        android:layout_below="@+id/ivProfilePic"
+        android:layout_alignLeft="@+id/ivProfilePic"
+        android:layout_alignStart="@+id/ivProfilePic" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivMedia"
+        android:layout_below="@+id/tvTweet"
+        android:layout_alignLeft="@+id/tvTweet"
+        android:layout_alignStart="@+id/tvTweet" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="21 RETWEETS 38 FAVORITES"
+        android:id="@+id/tvCounter"
+        android:layout_below="@+id/ivMedia"
+        android:layout_alignLeft="@+id/ivMedia"
+        android:layout_alignStart="@+id/ivMedia" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivReply"
+        android:layout_below="@+id/tvCounter"
+        android:layout_alignLeft="@+id/tvCounter"
+        android:layout_alignStart="@+id/tvCounter"
+        android:src="@drawable/twitter_reply" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivRetweet"
+        android:layout_below="@+id/tvCounter"
+        android:layout_toRightOf="@+id/ivReply"
+        android:layout_toEndOf="@+id/ivReply"
+        android:src="@drawable/twitter_retweet" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivFavorites"
+        android:src="@drawable/twitter_fav_colored"
+        android:layout_alignTop="@+id/ivRetweet"
+        android:layout_toRightOf="@+id/ivRetweet"
+        android:layout_toEndOf="@+id/ivRetweet" />
+</RelativeLayout>

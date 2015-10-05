@@ -52,8 +52,11 @@
         </activity>
         <activity
             android:name=".ComposeActivity"
-            android:label="@string/title_activity_compose">
-
+            android:label="@string/title_activity_compose" >
+        </activity>
+        <activity
+            android:name=".TweetDetailActivity"
+            android:label="Tweet" >
         </activity>
     </application>
 

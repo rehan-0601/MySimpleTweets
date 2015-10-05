@@ -1,0 +1,105 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.codepath.apps.mysimpletweets.TweetDetailActivity"
+    android:padding="10dp">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/ivProfilePic"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User "
+        android:id="@+id/tvUserName"
+        android:layout_alignTop="@+id/ivProfilePic"
+        android:layout_toRightOf="@+id/ivProfilePic"
+        android:layout_toEndOf="@+id/ivProfilePic"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="userid"
+        android:id="@+id/tvScreenName"
+        android:layout_below="@+id/tvUserName"
+        android:layout_toRightOf="@+id/ivProfilePic"
+        android:layout_toEndOf="@+id/ivProfilePic"
+        android:layout_marginLeft="10dp"
+        android:textSize="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tweet"
+        android:id="@+id/tvTweet"
+        android:layout_below="@+id/ivProfilePic"
+        android:layout_alignLeft="@+id/ivProfilePic"
+        android:layout_alignStart="@+id/ivProfilePic"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="15dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivMedia"
+        android:layout_below="@+id/tvTweet"
+        android:layout_alignLeft="@+id/tvTweet"
+        android:layout_alignStart="@+id/tvTweet"
+        android:layout_margin="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="21 RETWEETS 38 FAVORITES"
+        android:id="@+id/tvCounter"
+        android:layout_below="@+id/ivMedia"
+        android:layout_alignLeft="@+id/ivMedia"
+        android:layout_alignStart="@+id/ivMedia"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="12dp" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/ivReply"
+        android:layout_below="@+id/tvCounter"
+        android:layout_alignLeft="@+id/tvCounter"
+        android:layout_alignStart="@+id/tvCounter"
+        android:src="@drawable/twitter_reply"
+        android:layout_marginTop="5dp" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/ivRetweet"
+        android:layout_below="@+id/tvCounter"
+        android:layout_toRightOf="@+id/ivReply"
+        android:layout_toEndOf="@+id/ivReply"
+        android:src="@drawable/twitter_retweet"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="30dp" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/ivFavorites"
+        android:src="@drawable/twitter_fav_colored"
+        android:layout_alignTop="@+id/ivRetweet"
+        android:layout_toRightOf="@+id/ivRetweet"
+        android:layout_toEndOf="@+id/tvUserName"
+        android:layout_marginLeft="30dp" />
+
+</RelativeLayout>

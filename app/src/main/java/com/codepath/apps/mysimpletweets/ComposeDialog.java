@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,9 @@ public class ComposeDialog extends DialogFragment {
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
         getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
-
+        //not working in onViewCreated, hence using it in onResume
+        etTweet.getText().clear();
+        tvLength.setText("140");
         super.onResume();
     }
 
@@ -88,12 +91,23 @@ public class ComposeDialog extends DialogFragment {
                                     }
         );
 
+        etTweet.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int length = etTweet.getText().toString().length();
+                int limit = 140 - length;
+                tvLength.setText(Integer.toString(limit));
+                return false;
+            }
+        });
+
+
+
     }
 
 
     public void onTweet() {
         //handle click here
-
         //grab the tweet text
         String tweet = etTweet.getText().toString();
         client = TwitterApplication.getRestClient();
@@ -119,6 +133,12 @@ public class ComposeDialog extends DialogFragment {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Toast.makeText(getContext(), "fail-post", Toast.LENGTH_SHORT).show();
+                dismiss();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Toast.makeText(getContext(), "Fail-post", Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         }, tweet);
