@@ -25,7 +25,7 @@ import org.json.JSONObject;
  * Created by rmulla on 10/3/15.
  */
 public class ComposeDialog extends DialogFragment {
-
+    private String replyToUser;
     private TwitterClient client;
     private Button btnTweet;
     private TextView tvLength;
@@ -61,6 +61,13 @@ public class ComposeDialog extends DialogFragment {
         //not working in onViewCreated, hence using it in onResume
         etTweet.getText().clear();
         tvLength.setText("140");
+
+        if(replyToUser!=null){
+            Toast.makeText(getContext(), "reply to  user NOT NUll", Toast.LENGTH_SHORT).show();
+            etTweet.setText("@"+replyToUser);
+            etTweet.requestFocus();
+        }
+
         super.onResume();
     }
 
@@ -71,6 +78,7 @@ public class ComposeDialog extends DialogFragment {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         //getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         //getDialog().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        replyToUser = getArguments().getString("replyToUser",null);
         return inflater.inflate(R.layout.dialog_compose, container);
     }
 
@@ -81,6 +89,8 @@ public class ComposeDialog extends DialogFragment {
         etTweet = (EditText) view.findViewById(R.id.etTweet);
         tvLength = (TextView)view.findViewById(R.id.tvLength);
         btnTweet = (Button) view.findViewById(R.id.btnTweet);
+
+
 
         btnTweet.setOnClickListener(new View.OnClickListener() {
 

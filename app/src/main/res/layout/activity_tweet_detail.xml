@@ -71,7 +71,10 @@
         android:layout_marginBottom="8dp"
         android:textSize="12dp" />
 
-    <ImageView
+    <ImageButton
+
+        android:scaleType="centerCrop"
+        android:onClick="onReplyTweet"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:id="@+id/ivReply"
@@ -79,7 +82,9 @@
         android:layout_alignLeft="@+id/tvCounter"
         android:layout_alignStart="@+id/tvCounter"
         android:src="@drawable/twitter_reply"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:foreground="@drawable/twitter_reply"
+        android:background="#fffafa" />
 
     <ImageView
         android:layout_width="30dp"
@@ -101,5 +106,7 @@
         android:layout_toRightOf="@+id/ivRetweet"
         android:layout_toEndOf="@+id/tvUserName"
         android:layout_marginLeft="30dp" />
+
+
 
 </RelativeLayout>
