@@ -30,6 +30,8 @@ The following **optional** features are implemented:
 * [4] Improve the user interface and theme the app to feel "twitter branded"
     Lots of improvements - Todo, done some
 
+* [5] user can reply to tweet from the tweet detail view
+
 The following **bonus** features are implemented:
 
 * [5] Compose tweet functionality is build using modal overlay
@@ -43,6 +45,10 @@ The following **additional** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 <img src='https://github.com/rehan-0601/MySimpleTweets/blob/master/twitter_client.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+Walkthrough for the 'reply to tweet from detail tweet view' feature
+<img src='https://github.com/rehan-0601/MySimpleTweets/blob/master/reply_tweet.gif' title='Video Walkthrough-reply feature' width='' alt='Video Walkthrough' />
+
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
