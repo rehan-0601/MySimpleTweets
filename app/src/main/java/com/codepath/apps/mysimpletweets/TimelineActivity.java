@@ -52,8 +52,6 @@ public class TimelineActivity extends AppCompatActivity {
         //addListenerToListView();
 
         //setup listeners that timeline activity needs to react to
-
-
         //get the viewpager
         ViewPager vpPager = (ViewPager)findViewById(R.id.viewpager);
         //set viewpager adapter for the pager
@@ -79,40 +77,15 @@ public class TimelineActivity extends AppCompatActivity {
                 if (hometimelineFragment.getaTweets()!=null){
                     newTweets.addAll(hometimelineFragment.getTweets());
                 }
-                //newTweets.addAll(hometimelineFrag.getTweets());
                 newTweets.add(0, postedTweet);
-                //aTweets.add(postedTweet);
                 hometimelineFragment.clear();
                 hometimelineFragment.addAll(newTweets);
-                //hometimelineFrag.getaTweets().notifyDataSetChanged();
+
 
             }
         });
     }
-/*
-        lvTweets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Tweet tweet = tweets.get(position);
-                Intent tweetDetailIntent = new Intent(TimelineActivity.this, TweetDetailActivity.class);
-                tweetDetailIntent.putExtra("current_tweet",tweet);
-                startActivity(tweetDetailIntent);
 
-            }
-        });
-
-    }
-
-    private void addListenerToListView(){
-        lvTweets.setOnScrollListener(new EndlessScrollListener() {
-            @Override
-            public boolean onLoadMore(int page, int totalItemsCount) {
-                populateTimeline(curr_max_id);
-                return true;
-            }
-        });
-    }
-*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -147,25 +120,9 @@ public class TimelineActivity extends AppCompatActivity {
     private void showComposeDialog(){
         FragmentManager fm = getSupportFragmentManager();
         //initialising in onCreate. we need the instance earlier to set the listener on it. and we need to use same instance not a new one
-        //composeDialog = ComposeDialog.newInstance("Compose a tweet");
         composeDialog.show(fm, "dialog_compose");
     }
-/*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // REQUEST_CODE is defined above
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-            //recover the tweet passed in ==> postedTweet.
-            //append to the adapter
-            //notify changes
-            Tweet postedTweet = (Tweet) data.getSerializableExtra("posted_tweet");
-            //Need to add new tweet to beginning of adapter. Not sure which api. Using the List to do it.
-            tweets.add(0, postedTweet);
-            //aTweets.add(postedTweet);
-            aTweets.notifyDataSetChanged();
-        }
-    }
-*/
+
     //return order of fragments in the view pager
     public class TweetsPagerAdapter extends FragmentPagerAdapter{
 

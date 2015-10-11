@@ -79,6 +79,9 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         tvFavorite.setText(Integer.toString(tweet.getFavoritedCount()));
 
 
+
+
+
         ivProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

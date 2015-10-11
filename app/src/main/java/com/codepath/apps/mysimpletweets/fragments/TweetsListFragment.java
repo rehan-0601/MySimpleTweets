@@ -66,6 +66,16 @@ public abstract class TweetsListFragment extends Fragment{
         lvTweets.setAdapter(aTweets);
 
 
+        lvTweets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Tweet tweet = tweets.get(position);
+                Intent tweetDetailIntent = new Intent(getActivity(), TweetDetailActivity.class);
+                tweetDetailIntent.putExtra("current_tweet",tweet);
+                startActivity(tweetDetailIntent);
+            }
+        });
+
         lvTweets.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
