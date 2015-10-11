@@ -1,6 +1,7 @@
 package com.codepath.apps.mysimpletweets;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import java.util.Locale;
  */
 //Taking the tweets objets and turning them into views displayed in the list
 public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
+    private Tweet tweet;
     public TweetsArrayAdapter(Context context, List<Tweet> tweets) {
         //super(context, android.R.layout.simple_list_item_1);
         //using my own custom logic instead of simple_list_item_1
@@ -38,15 +40,17 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //get tweet
-        Tweet tweet = getItem(position);
+        tweet = getItem(position);
         //find /inflate template
         //find the subviews to fill in data with the template
         //populate data into subviews
         //return the view to be inserted into the list
         if (convertView==null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_tweet, parent, false);
+            //convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
         }
         ImageView ivProfileImage = (ImageView) convertView.findViewById(R.id.ivProfileImage);
+
         TextView tvUserName = (TextView) convertView.findViewById(R.id.tvUserName);
         TextView tvUser = (TextView) convertView.findViewById(R.id.tvUser);
         TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
@@ -57,6 +61,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
 
         tvUser.setText(tweet.getUser().getName());
         tvUserName.setText("@"+tweet.getUser().getScreenName());
+        ivProfileImage.setTag(tweet);
         tvBody.setText(tweet.getBody());
         tvCreatedAt.setText(trimRelativeTimeAgo(getRelativeTimeAgo(tweet.getCreatedAt())));
 
@@ -73,6 +78,18 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         tvRetweet.setText(Integer.toString(tweet.getRetweetCount()));
         tvFavorite.setText(Integer.toString(tweet.getFavoritedCount()));
 
+
+        ivProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Tweet curr_tweet =(Tweet) v.getTag();
+                String screen_name = curr_tweet.getUser().getScreenName();
+                Intent i = new Intent(getContext(), ProfileActivity.class);
+                i.putExtra("screen_name", curr_tweet.getUser().getScreenName());
+                i.putExtra("current_tweet", curr_tweet);
+                getContext().startActivity(i);
+            }
+        });
 
         return convertView;
     }
@@ -97,7 +114,10 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
 
     private String trimRelativeTimeAgo(String str){
         String[] timeArray = str.split(" ");
-        String result = timeArray[0]+timeArray[1].substring(0,1);
-        return  result;
+        if (timeArray.length>1) {
+            String result = timeArray[0] + timeArray[1].substring(0, 1);
+            return  result;
+        }
+        else return str;
     }
 }

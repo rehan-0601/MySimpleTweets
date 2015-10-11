@@ -60,7 +60,8 @@ public class Tweet implements Serializable {
             tweet.createdAt = jsonObject.getString("created_at");
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
             tweet.retweetCount = jsonObject.getInt("retweet_count");
-            tweet.favoritesCount = jsonObject.getInt("favorites_count");
+
+            tweet.favoritesCount = jsonObject.optInt("favorites_count",0);
 
             tweet.mediaUrl = null;
             if(jsonObject.optJSONObject("entities")!=null){

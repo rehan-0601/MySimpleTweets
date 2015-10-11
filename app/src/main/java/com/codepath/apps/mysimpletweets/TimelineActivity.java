@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,25 +19,25 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.mysimpletweets.ComposeDialog.ComposeDialogListener;
+import com.codepath.apps.mysimpletweets.fragments.HomeTimelineFragment;
+import com.codepath.apps.mysimpletweets.fragments.MentionsTimelineFragment;
+import com.codepath.apps.mysimpletweets.fragments.TweetsListFragment;
 import com.codepath.apps.mysimpletweets.helpers.EndlessScrollListener;
 import com.codepath.apps.mysimpletweets.models.Tweet;
+import com.codepath.apps.mysimpletweets.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.scribe.builder.api.TwitterApi;
 
 import java.util.ArrayList;
 
 public class TimelineActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 10;
-    private TwitterClient client;
-    private ArrayList<Tweet> tweets;
-    private TweetsArrayAdapter aTweets;
-    private ListView lvTweets;
-    private long curr_max_id = 0;
-    private SwipeRefreshLayout swipeContainer;
     private ComposeDialog composeDialog;
 
 
@@ -45,47 +48,22 @@ public class TimelineActivity extends AppCompatActivity {
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#55ACEE")));
 
-        lvTweets = (ListView) findViewById(R.id.lvTweets);
-        tweets = new ArrayList<>();
-        aTweets = new TweetsArrayAdapter(this, tweets);
-        lvTweets.setAdapter(aTweets);
-
-
-
-        addListenerToListView();
-
-
-        client = TwitterApplication.getRestClient(); //singleton client
-        //max_id set to 0 for first time populating the listview. subsequent scrolls, handle in the scrolllistener
-        populateTimeline(0);
-
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-        // Setup refresh listener which triggers new data loading
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Your code to refresh the list here.
-                // Make sure you call swipeContainer.setRefreshing(false)
-                // once the network request has completed successfully.
-                //clearing out old list before we populate new ones
-                aTweets.clear();
-                populateTimeline(0);
-                swipeContainer.setRefreshing(false);
-                aTweets.notifyDataSetChanged();
-            }
-        });
-        // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        //addListenerToListView();
 
         //setup listeners that timeline activity needs to react to
-        setUpListeners();
+        //setUpListeners();
 
+        //get the viewpager
+        ViewPager vpPager = (ViewPager)findViewById(R.id.viewpager);
+        //set viewpager adapter for the pager
+        vpPager.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager()));
+        //find the pager sliding tabs
+        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip)findViewById(R.id.tabs);
+        //attach pager tabs to viewpager
+        tabStrip.setViewPager(vpPager);
 
     }
-
+    /*
     private void setUpListeners(){
         composeDialog = ComposeDialog.newInstance("Compose a tweet");
         composeDialog.setComposeDialogListener(new ComposeDialogListener() {
@@ -122,37 +100,7 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
     }
-    //Send an API req to get timeline.json
-    //populate the listview
-    private void populateTimeline(long max_id){
-        client.getHomeTimeline(new JsonHttpResponseHandler() {
-            //SUCCESS
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
-                //Toast.makeText(getApplicationContext(), "Success-getHome", Toast.LENGTH_LONG).show();
-                Log.d("DEBUG", json.toString());
-                //JSON HERE
-                //DESERIALIZE JSON
-                //CREATE MODELS and ADD THEM to the adapter
-                //LOAD MODEL DATA INTO LISTVIEW
-                aTweets.addAll(Tweet.fromJSONArray(json));
-                curr_max_id = aTweets.getItem(aTweets.getCount() - 1).getUid() - 1;
-                //Toast.makeText(getApplicationContext(), "MAX_ID is" + curr_max_id, Toast.LENGTH_LONG).show();
-
-            }
-
-
-            //FAILURE
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                //Toast.makeText(getApplicationContext(), errorResponse.toString(), Toast.LENGTH_LONG).show();
-                Log.d("DEBUG", errorResponse.toString());
-
-            }
-
-
-        }, max_id);
-    }
+*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -170,9 +118,9 @@ public class TimelineActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -190,7 +138,7 @@ public class TimelineActivity extends AppCompatActivity {
         //composeDialog = ComposeDialog.newInstance("Compose a tweet");
         composeDialog.show(fm, "dialog_compose");
     }
-
+/*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // REQUEST_CODE is defined above
@@ -205,5 +153,61 @@ public class TimelineActivity extends AppCompatActivity {
             aTweets.notifyDataSetChanged();
         }
     }
+*/
+    //return order of fragments in the view pager
+    public class TweetsPagerAdapter extends FragmentPagerAdapter{
 
+        final int PAGE_COUNT=2;
+        private String tabTitles[] ={"Home","Mentions"};
+
+
+        //adapter gets the manager which is used to insert or remove fragment from the activity
+        public TweetsPagerAdapter(FragmentManager fm){
+            super(fm);
+        }
+
+    @Override
+    public Fragment getItem(int position) {
+        if(position == 0){
+            return  new HomeTimelineFragment();
+        }
+        else if(position == 1){
+            return new MentionsTimelineFragment();
+        }else
+            return null;
+    }
+
+    //how many fragments
+    @Override
+    public int getCount() {
+        return  tabTitles.length;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabTitles[position];
+    }
+}
+    public User user;
+    public void onProfileView(MenuItem mi){
+
+        TwitterClient client = TwitterApplication.getRestClient();
+        client.getUserInfo(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                //Toast.makeText(TimelineActivity.this, "PAss get user", Toast.LENGTH_SHORT).show();
+                user = User.fromJSON(response);
+                Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+                i.putExtra("screen_name", user.getScreenName());
+                startActivity(i);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                //Toast.makeText(TimelineActivity.this, "FAIL get user", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //Launch profile view
+
+    }
 }
