@@ -28,7 +28,6 @@ public class TweetDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tweet_detail);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#55ACEE")));
 
-
         currentTweet = (Tweet) getIntent().getSerializableExtra("current_tweet");
 
         ImageView ivProfilePic = (ImageView)findViewById(R.id.ivProfilePic);
@@ -45,7 +44,7 @@ public class TweetDetailActivity extends AppCompatActivity {
         tvCounter.setText(Integer.toString(currentTweet.getRetweetCount())+ " RETWEETS "+ Integer.toString(currentTweet.getFavoritedCount())+" FAVORITES");
         if(currentTweet.getMediaUrl()!=null){
             //Toast.makeText(this, "Media URL not null", Toast.LENGTH_SHORT).show();
-            Picasso.with(getApplicationContext()).load(currentTweet.getMediaUrl()).resize(300,300).into(ivMedia);
+            Picasso.with(getApplicationContext()).load(currentTweet.getMediaUrl()).into(ivMedia);
         }
 
 
