@@ -19,6 +19,8 @@ import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by rmulla on 10/6/15.
  */
@@ -26,6 +28,8 @@ public class HomeTimelineFragment extends TweetsListFragment {
     private TwitterClient client;
     private long curr_max_id = 0;
     private SwipeRefreshLayout swipeContainer;
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

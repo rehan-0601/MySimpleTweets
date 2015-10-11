@@ -37,6 +37,7 @@ import org.scribe.builder.api.TwitterApi;
 import java.util.ArrayList;
 
 public class TimelineActivity extends AppCompatActivity {
+    HomeTimelineFragment hometimelineFragment;
     public static final int REQUEST_CODE = 10;
     private ComposeDialog composeDialog;
 
@@ -51,7 +52,7 @@ public class TimelineActivity extends AppCompatActivity {
         //addListenerToListView();
 
         //setup listeners that timeline activity needs to react to
-        //setUpListeners();
+
 
         //get the viewpager
         ViewPager vpPager = (ViewPager)findViewById(R.id.viewpager);
@@ -61,23 +62,34 @@ public class TimelineActivity extends AppCompatActivity {
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip)findViewById(R.id.tabs);
         //attach pager tabs to viewpager
         tabStrip.setViewPager(vpPager);
+        composeDialog = ComposeDialog.newInstance("Compose a tweet");
+        setUpListeners();
 
     }
-    /*
-    private void setUpListeners(){
-        composeDialog = ComposeDialog.newInstance("Compose a tweet");
+
+    private void setUpListeners() {
+
         composeDialog.setComposeDialogListener(new ComposeDialogListener() {
             //hello
             @Override
             public void onTweetFinish(Tweet postedTweet) {
                 //Need to add new tweet to beginning of adapter. Not sure which api. Using the List to do it.
-                tweets.add(0, postedTweet);
+                //HomeTimelineFragment hometimelineFrag = new HomeTimelineFragment();
+                ArrayList<Tweet> newTweets = new ArrayList<Tweet>();
+                if (hometimelineFragment.getaTweets()!=null){
+                    newTweets.addAll(hometimelineFragment.getTweets());
+                }
+                //newTweets.addAll(hometimelineFrag.getTweets());
+                newTweets.add(0, postedTweet);
                 //aTweets.add(postedTweet);
-                aTweets.notifyDataSetChanged();
+                hometimelineFragment.clear();
+                hometimelineFragment.addAll(newTweets);
+                //hometimelineFrag.getaTweets().notifyDataSetChanged();
 
             }
         });
-
+    }
+/*
         lvTweets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -134,7 +146,7 @@ public class TimelineActivity extends AppCompatActivity {
 
     private void showComposeDialog(){
         FragmentManager fm = getSupportFragmentManager();
-        //initialising in onCreate. we need the instance earlier to set the listener on it.
+        //initialising in onCreate. we need the instance earlier to set the listener on it. and we need to use same instance not a new one
         //composeDialog = ComposeDialog.newInstance("Compose a tweet");
         composeDialog.show(fm, "dialog_compose");
     }
@@ -169,7 +181,8 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     public Fragment getItem(int position) {
         if(position == 0){
-            return  new HomeTimelineFragment();
+            hometimelineFragment = new HomeTimelineFragment();
+            return  hometimelineFragment;
         }
         else if(position == 1){
             return new MentionsTimelineFragment();

@@ -27,8 +27,8 @@ import java.util.List;
 public abstract class TweetsListFragment extends Fragment{
 
     private long curr_max_id;
-    private ArrayList<Tweet> tweets;
-    private TweetsArrayAdapter aTweets;
+    private  ArrayList<Tweet> tweets;
+    private  TweetsArrayAdapter aTweets;
     private ListView lvTweets;
     private SwipeRefreshLayout swipeContainer;
 
@@ -36,8 +36,27 @@ public abstract class TweetsListFragment extends Fragment{
         return aTweets;
     }
 
+    public ArrayList<Tweet> getTweets(){
+        if (tweets!=null){
+            return tweets;
+        }
+      return null;
+    }
+    //will be used by the timeline activity while communicating with the fragment. Since it doesnt have arraylist and adapter
+    public void clear(){
+        if (tweets!=null){
+        tweets.clear();
+        }
+    }
 
-    //infalation logic
+    public void addAll(ArrayList<Tweet> newTweets){
+        if(tweets!=null){
+            tweets.addAll(newTweets);
+        }
+        if(aTweets!=null){
+            aTweets.notifyDataSetChanged();
+        }
+    }
 
     @Nullable
     @Override
