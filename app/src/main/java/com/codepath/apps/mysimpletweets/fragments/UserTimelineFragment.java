@@ -71,7 +71,7 @@ public class UserTimelineFragment extends TweetsListFragment {
             //FAILURE
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Toast.makeText(getActivity(), errorResponse.toString(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), errorResponse.toString(), Toast.LENGTH_LONG).show();
                 Log.d("DEBUG", errorResponse.toString());
 
             }

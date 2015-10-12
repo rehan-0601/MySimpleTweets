@@ -63,7 +63,7 @@ public class ComposeDialog extends DialogFragment {
         tvLength.setText("140");
 
         if(replyToUser!=null){
-            Toast.makeText(getContext(), "reply to  user NOT NUll", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "reply to  user NOT NUll", Toast.LENGTH_SHORT).show();
             etTweet.setText("@"+replyToUser);
             etTweet.requestFocus();
         }
@@ -126,13 +126,13 @@ public class ComposeDialog extends DialogFragment {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Toast.makeText(getContext(), "success-post", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "success-post", Toast.LENGTH_SHORT).show();
                 //from the response JSON, create a Tweet object, pass this into the intent while returning to timeline
                 postedTweet = Tweet.fromJSON(response);
                 //pass the tweet object back to calling activity using the listener.
                 //close this fragment
                 if(cdlistener==null){
-                    Toast.makeText(getContext(), "Listener is NULL", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Listener is NULL", Toast.LENGTH_SHORT).show();
                 }else {
                     cdlistener.onTweetFinish(postedTweet);
                 }
@@ -142,13 +142,13 @@ public class ComposeDialog extends DialogFragment {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(getContext(), "fail-post", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "fail-post", Toast.LENGTH_SHORT).show();
                 dismiss();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Toast.makeText(getContext(), "Fail-post", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Fail-post", Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         }, tweet);

@@ -41,9 +41,9 @@ public class MentionsTimelineFragment extends TweetsListFragment {
                 //oast.makeText(getActivity(), "Success-getHome", Toast.LENGTH_LONG).show();
                 Log.d("DEBUG", json.toString());
                 if(json==null){
-                    Toast.makeText(getActivity(), "JSON is null", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), "JSON is null", Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(getActivity(), Integer.toString(json.length()), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), Integer.toString(json.length()), Toast.LENGTH_LONG).show();
                 }
                 //JSON HERE
                 //DESERIALIZE JSON
@@ -60,7 +60,7 @@ public class MentionsTimelineFragment extends TweetsListFragment {
             //FAILURE
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Toast.makeText(getActivity(), errorResponse.toString(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), errorResponse.toString(), Toast.LENGTH_LONG).show();
                 Log.d("DEBUG", errorResponse.toString());
 
             }

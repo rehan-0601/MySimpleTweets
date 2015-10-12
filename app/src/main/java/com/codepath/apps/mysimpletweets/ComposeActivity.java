@@ -46,7 +46,7 @@ public class ComposeActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Toast.makeText(getApplicationContext(), "success-post", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "success-post", Toast.LENGTH_SHORT).show();
                 //from the response JSON, create a Tweet object, pass this into the intent while returning to timeline
                 postedTweet = Tweet.fromJSON(response);
                 //pass the tweet object back to calling activity.
@@ -60,8 +60,9 @@ public class ComposeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(getApplicationContext(), "dfsdvdjhvj", Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "fail-post", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "dfsdvdjhvj", Toast.LENGTH_SHORT).show();
+                //
+                // Toast.makeText(getApplicationContext(), "fail-post", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }, tweet);
