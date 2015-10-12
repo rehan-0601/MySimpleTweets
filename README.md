@@ -1,54 +1,40 @@
-# Project 3 - Twitter client
+# Project 4 - *Twitter Client*
 
- Twitter client is an android app that allows a user to view his Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
+**Name of your app** is an android app that allows a user to view home and mentions timelines, view user profiles with user timelines, as well as compose and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: 15 hours spent in total
+Time spent: **15** hours spent in total
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-* [1]	User can **sign in to Twitter** using OAuth login
-* [2]	User can **view tweets from their home timeline**
-  * [a] User is displayed the username, name, and body for each tweet
-  * [b] User is displayed the [relative timestamp](https://gist.github.com/nesquena/f786232f5ef72f6e10a7) for each tweet "8m", "7h"
-  * [c] User can view more tweets as they scroll with [infinite pagination](http://guides.codepath.com/android/Endless-Scrolling-with-AdapterViews). Number of tweets is unlimited.
-    However there are [Twitter Api Rate Limits](https://dev.twitter.com/rest/public/rate-limiting) in place.
-* [3] User can **compose and post a new tweet**
-  * [a] User can click a “Compose” icon in the Action Bar on the top right
-  * [b] User can then enter a new tweet and post this to twitter
-  * [c] User is taken back to home timeline with **new tweet visible** in timeline
+* [1] The app includes **all required user stories** from Week 3 Twitter Client
+* [2] User can **switch between Timeline and Mention views using tabs**
+  * [a] User can view their home timeline tweets.
+  * [b] User can view the recent mentions of their username.
+* [3] User can navigate to **view their own profile**
+  * [a] User can see picture, tagline, # of followers, # of following, and tweets on their profile.
+* [4] User can **click on the profile image** in any tweet to see **another user's** profile.
+ * [a] User can see picture, tagline, # of followers, # of following, and tweets of clicked user.
+ * [b] Profile view includes that user's timeline
+* [5] User can [infinitely paginate](http://guides.codepath.com/android/Endless-Scrolling-with-AdapterViews) any of these timelines (home, mentions, user) by scrolling to the bottom
 
 The following **optional** features are implemented:
 
-* [1] User can **see a counter with total number of characters left for tweet** on compose tweet page
-
-* [2] User can **pull down to refresh tweets timeline**
-
-* [3] User can tap a tweet to **open a detailed tweet view**
-
-* [4] Improve the user interface and theme the app to feel "twitter branded"
-    Lots of improvements - Todo, done some
-
-* [5] user can reply to tweet from the tweet detail view
+* [1] User can view following / followers list through the profile
+* [2] User can **"reply" to any tweet on their home timeline**
+  * [a] The user that wrote the original tweet is automatically "@" replied in compose
+* [3] User can click on a tweet to be **taken to a "detail view"** of that tweet
+ 
 
 The following **bonus** features are implemented:
-
-* [5] Compose tweet functionality is build using modal overlay
-
-The following **additional** features are implemented:
-
-* [ ] List anything else that you can get done to improve the app functionality!
+None
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/rehan-0601/MySimpleTweets/blob/master/twitter_client.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-Walkthrough for the 'reply to tweet from detail tweet view' feature
-<img src='https://github.com/rehan-0601/MySimpleTweets/blob/master/reply_tweet.gif' title='Video Walkthrough-reply feature' width='' alt='Video Walkthrough' />
-
+<img src='https://github.com/rehan-0601/MySimpleTweets/blob/version_advanced/reply_tweet.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
