@@ -34,7 +34,7 @@ None
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/rehan-0601/MySimpleTweets/blob/version_advanced/reply_tweet.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/rehan-0601/MySimpleTweets/blob/version_advanced/advanced_walkthru.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
